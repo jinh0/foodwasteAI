@@ -1,6 +1,8 @@
 # foodwasteAI
 AI Project to Reduce Food Waste in Woodstock School, Mussoorie.
-Code written in Octave.
+Code written in MATLAB/Octave.
+
+Started in September 21, 2019.
 
 ## Objective
 Create a supply and demand optimization algorithm to reduce food waste in the school.
