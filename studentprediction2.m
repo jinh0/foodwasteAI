@@ -30,7 +30,7 @@ mu = mean(X_training);
 sigma = std(X_training);
 
 % Initial visualization
-scatter3(X_training(:,1), X_training(:,2), y_training)
+scatter3(X_training(:, 1), X_training(:, 2), y_training)
 xlabel('Rice');
 ylabel('Dal');
 zlabel('Wastage');
@@ -104,13 +104,13 @@ pause;
 fprintf('\nPredictions against TRAINING Data Visualization:\n');
 fprintf('BLUE: training data points\nRED: predicted points\n\n');
 
-scatter3(X_training(:,3), X_training(:,2), y_training)
+scatter3(X_training(:, 3), X_training(:, 2), y_training)
 xlabel('Dal');
 ylabel('Rice');
 zlabel('Wastage');
 
 hold on
-scatter3(X_training(:,3), X_training(:,2), X_training * theta, 'r')
+scatter3(X_training(:, 3), X_training(:, 2), X_training * theta, 'r')
 hold off
 
 fprintf('Program paused. Press enter to continue.\n');
@@ -124,13 +124,13 @@ X_test = normalize_features(X_test, mu_test, sigma_test);
 
 X_test = [ones(size(X_test, 1), 1), X_test];
 
-scatter3(X_test(:,3), X_test(:,2), y_test)
+scatter3(X_test(:, 3), X_test(:, 2), y_test)
 xlabel('Dal');
 ylabel('Rice');
 zlabel('Wastage');
 
 hold on
-scatter3(X_test(:,3), X_test(:,2), X_test * theta, 'r')
+scatter3(X_test(:, 3), X_test(:, 2), X_test * theta, 'r')
 hold off
 
 J = (sum(((X_test * theta) - y_test) .^ 2)) / (2 * length(y_test));
