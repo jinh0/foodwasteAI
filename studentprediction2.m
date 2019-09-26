@@ -14,10 +14,13 @@ y = data(:,4);
 
 degrees = input('Degree of polynomial variables (default 1): ');
 
+%num = input('Value of parameter: ');
+
 % Add polynomial variables
-if degrees > 1
-    X = polynomial_features(X, degrees);
+if num > 4
+    X = polynomial_features(X, degrees, num);
 end
+
 
 % Split data
 [X_training, X_test, y_training, y_test] = splitdata(X, y);
