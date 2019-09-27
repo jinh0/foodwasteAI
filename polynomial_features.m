@@ -13,7 +13,6 @@ for i = 0 : degrees % power for rice
             X_add = [X_add, (X(:, 1) .^ i) .* (X(:, 2) .^ j) .* (X(:, 3) .^ k)];
         end
     end
-    size(X, 2)
 end
 
 % Remove the column where all powers of variables are 0, which makes 1
