@@ -16,6 +16,20 @@ Data collection started September 2nd, 2019 and will be updated weekly.
 
 There is existing but meager data from April 2017 to July 2017.
 
+## Example Results
+Comparison of real data and predicted points, from `predict2.m`.
+
++ **Blue** is real data
++ **Red** is predicted points
+
+When there are 3 features (variables):
+
+![predictions when degrees is one](img/predictions_degrees_1.png)
+
+When there are 127 features (variables):
+
+![predictions when degrees is four](img/predictions_degrees_4.png)
+
 ## File Navigation
 
 ### Data
