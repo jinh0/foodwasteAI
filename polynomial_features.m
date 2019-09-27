@@ -1,28 +1,25 @@
-function [X_added_features] = polynomial_features(X, degrees, num)
+% Creates more features from the already existing variables
+function [X_added_features] = polynomial_features(X, degrees)
 
-% indicates the original number of variables
-initial_n = size(X, 2)
+initial_n = size(X, 2);
 
-X_add_features = [];
+X_add = [];
 
-% Independent polynomial variables
-
-for d = 2:degrees
-    X_add_features = [X_add_features, X(:, 1:initial_n) .^ d];
-end
-
-X = [X, X_add_features];
-
-size(X, 2)
-
-% Intermingling of variables
-for i = 1:degrees
-    for j = i+1:degrees
-        X = [X, X(:,i) .* X(:,j)];
+% Create independent, separated polynomial variables
+% 3 loops for the 3 initial columns
+for i = 0 : degrees % power for rice
+    for j = 0 : degrees % power for Dal
+        for k = 0 : degrees % power for students
+            X_add = [X_add, (X(:, 1) .^ i) .* (X(:, 2) .^ j) .* (X(:, 3) .^ k)];
+        end
     end
     size(X, 2)
 end
 
-X_added_features = X(:,1:num);
+% Remove the column where all powers of variables are 0, which makes 1
+X_add = X_add(:, 2 : size(X_add, 2));
+
+% Merge initial X and X_add
+X_added_features = [X, X_add];
 
 end

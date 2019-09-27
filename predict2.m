@@ -27,25 +27,25 @@ end
 
 % More useful variables
 m = size(X_training, 1);
-n = size(X_training, 2)
+n = size(X_training, 2);
 
 mu = mean(X_training);
 sigma = std(X_training);
 
 % Initial visualization
-scatter3(X_training(:,1), X_training(:,2), y_training)
+scatter3(X_training(:, 1), X_training(:, 2), y_training)
 xlabel('Rice');
 ylabel('Dal');
 zlabel('Wastage');
 
-in = input('Add fake data? 0 for no, 1 for yes: ');
+%in = input('Add fake data? 0 for no, 1 for yes: ');
 
-if in == 1
-    [X_fake, y_fake] = generate_synthetic_data(mu, sigma, y_training, n);
-
-    X_training = [X_training; X_fake];
-    y_training = [y_training; y_fake];
-endif
+%if in == 1
+%    [X_fake, y_fake] = generate_synthetic_data(mu, sigma, y_training, n);
+%
+%    X_training = [X_training; X_fake];
+%    y_training = [y_training; y_fake];
+%endif
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
@@ -98,7 +98,7 @@ fprintf('Students = %f\n', theta(4));
 %fprintf('Rice Squared = %f\n', theta(6));
 %fprintf('Dal Squared = %f\n', theta(7));
 
-J = sum(((X_training * theta) - y_training) .^ 2) / (2 * m);
+J = (sum(((X_training * theta) - y_training) .^ 2) + lambda * sum(theta(2:n) .^ 2)) / (2 * m);
 fprintf('\nCost: %f\n\n', J);
 
 fprintf('Program paused. Press enter to continue.\n');
@@ -107,13 +107,13 @@ pause;
 fprintf('\nPredictions against TRAINING Data Visualization:\n');
 fprintf('BLUE: training data points\nRED: predicted points\n\n');
 
-scatter3(X_training(:,3), X_training(:,2), y_training)
-xlabel('Dal');
-ylabel('Rice');
-zlabel('Wastage');
+scatter(X_training(:, 2), y_training);
+xlabel('Rice');
+ylabel('Wastage');
+title('Training Data against Predicted Points when Degrees = 1');
 
 hold on
-scatter3(X_training(:,3), X_training(:,2), X_training * theta, 'r')
+scatter(X_training(:, 2), X_training * theta, 'r');
 hold off
 
 fprintf('Program paused. Press enter to continue.\n');
@@ -127,16 +127,16 @@ X_test = normalize_features(X_test, mu_test, sigma_test);
 
 X_test = [ones(size(X_test, 1), 1), X_test];
 
-scatter3(X_test(:,3), X_test(:,2), y_test)
+scatter3(X_test(:, 3), X_test(:, 2), y_test)
 xlabel('Dal');
 ylabel('Rice');
 zlabel('Wastage');
 
 hold on
-scatter3(X_test(:,3), X_test(:,2), X_test * theta, 'r')
+scatter3(X_test(:, 3), X_test(:, 2), X_test * theta, 'r')
 hold off
 
-J = (sum(((X_test * theta) - y_test) .^ 2)) / (2 * length(y_test));
+J = ((sum(((X_test * theta) - y_test) .^ 2)) + lambda * sum(theta(2:n) .^ 2)) / (2 * length(y_test));
 fprintf('Cost: %f\n\n', J);
 
 fprintf('Program paused. Press enter to continue.\n');
