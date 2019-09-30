@@ -16,7 +16,7 @@ for i = 0 : degrees % power for rice
 end
 
 % Remove the column where all powers of variables are 0, which makes 1
-X_add = X_add(:, 2 : size(X_add, 2));
+X_add = X_add(:, 2:size(X_add, 2));
 
 % Merge initial X and X_add
 X_added_features = [X, X_add];

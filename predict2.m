@@ -82,7 +82,7 @@ fprintf('Students = %f\n', theta(4));
 J = sum(((X_training * theta) - y_training) .^ 2) / (2 * m);
 fprintf('\nCost: %f\n\n', J);
 
-lambda = 1;
+lambda = 3;
 [theta, J_history] = regularized_gradient_descent(X_training, y_training, theta, alpha, iterations, lambda);
 
 fprintf('With %0.1f iterations and learning rate of %0.2f with regularization, %0.2f:\n\n', iterations, alpha, lambda);
@@ -107,7 +107,7 @@ fprintf('BLUE: training data points\nRED: predicted points\n\n');
 scatter(X_training(:, 2), y_training);
 xlabel('Rice');
 ylabel('Wastage');
-title('Training Data against Predicted Points when Degrees = 1');
+title('Training Data against Predicted Points');
 
 hold on
 scatter(X_training(:, 2), X_training * theta, 'r');
