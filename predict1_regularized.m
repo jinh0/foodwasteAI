@@ -1,31 +1,34 @@
-# Student Prediction using rice and dal data
-# Regularization
-# Polynomial variables + output, Linear Regression Model
+% Student Prediction using rice and dal data
+% Regularization
+% Polynomial variables + output, Linear Regression Model
+
+% Access path to functions
+addpath('/functions')
 
 fprintf('Student Prediction v0.3\n');
 fprintf('Using rice and dal data + polynomial features\nand Regularization\n\n');
 
 data = load('foodwaste2017/dinner/total_dinner.txt');
 
-# Initialization of Useful Variables
+% Initialization of Useful Variables
 X = data(:,1:3);
 y = data(:,4);
 
-# Add rice x dal variable
+% Add rice x dal variable
 X = [X, X(:,1) .* X(:,2)];
-# Add rice^2 variable
+% Add rice^2 variable
 X = [X, X(:,1) .^ 2];
-# Add dal^2 variable
+% Add dal^2 variable
 X = [X, X(:,2) .^ 2];
 
-# More useful variables
+% More useful variables
 m = size(X, 1);
 n = size(X, 2);
 
 mu = mean(X);
 sigma = std(X);
 
-# Initial Visualization
+% Initial Visualization
 scatter3(X(:,1), X(:,2), y)
 xlabel('Rice');
 ylabel('Dal');
@@ -45,7 +48,7 @@ pause;
 
 fprintf('Features normalized.\n\n');
 
-# Normalize Features
+% Normalize Features
 X = normalize_features(X, mu, sigma);
 X = [ones(size(X, 1), 1), X];
 
@@ -56,7 +59,7 @@ zlabel('Wastage');
 
 fprintf('Gradient descent applied.\n\n');
 
-# Gradient Descent
+% Gradient Descent
 theta = rand(n + 1, 1);
 alpha = 0.01;
 iterations = 10000;

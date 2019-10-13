@@ -3,14 +3,17 @@
 %   Regularization
 %   Automated polynomial variables + output, Linear Regression Model
 
-fprintf('Student Prediction v0.4\n');
-fprintf('Using rice and dal data + automated polynomial features,\nregularization, and synthetic + split data\n\n');
+% Access path to functions
+addpath('functions')
 
 data = load('foodwaste2017/dinner/total_dinner.txt');
 
 % Initialization of useful variables
 X = data(:,1:3);
 y = data(:,4);
+
+fprintf('Student Prediction v0.4\n');
+fprintf('Using rice and dal data + automated polynomial features,\nregularization, and synthetic + split data\n\n');
 
 degrees = input('Degree of polynomial variables (default 1): ');
 

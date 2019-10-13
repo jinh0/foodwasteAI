@@ -5,6 +5,9 @@
 %       + Number of examples vs Cost
 %       + Lambda vs Cost
 
+% Access path to functions
+addpath('functions')
+
 fprintf('Validation and Debugging\n\n');
 
 % Load data and separate into X and y
