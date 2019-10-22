@@ -10,6 +10,8 @@ X_add = [];
 
 % Create independent, separated polynomial variables
 % 3 loops for the 3 initial columns
+% * Starts with powers of students rather than rice as in polynomial_features.m because
+% * more convenient to separate students-affected polynomial variables.
 for k = 0 : degrees % power for students
     for i = 0 : degrees % power for rice
         for j = 0 : degrees % power for dal
