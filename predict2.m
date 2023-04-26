@@ -27,7 +27,7 @@ end
 
 % More useful variables
 m = size(X_training, 1);
-n = size(X_training, 2);
+n = size(X_training, 2)
 
 mu = mean(X_training);
 sigma = std(X_training);
@@ -54,20 +54,71 @@ fprintf('\nFeatures normalized.\n\n');
 
 % Normalize features
 X_training = normalize_features(X_training, mu, sigma);
-X_training = [ones(size(X_training, 1), 1), X_training];
+X_training = [ones(size(X_training, 1), 1), X_training(:, 1:3)];
 
+k=linspace(-10,10,50);
+l=linspace(-10,10,50);
+
+m = size(X_training, 1);
+asdf = zeros(50, 50);
+for i = 1:50
+  for j = 1:50
+    tmp = [1;  k(i); l(j); 1];
+    asdf(i, j) = sum(((X_training * tmp) - y_training) .^ 2) / (2 * m);
+  end
+end
+
+[xx,yy]=meshgrid(k,l);
+mesh(xx,yy,asdf)
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
 fprintf('Gradient descent applied.\n\n');
 
 % Gradient descent
-theta = rand(n + 1, 1);
+theta = [1; rand(2, 1); 1];
 alpha = 0.01;
-iterations = 5000;
+iterations = 3000;
 
-[theta, J_history] = gradient_descent(X_training, y_training, theta, alpha, iterations);
+[theta, J_history, theta_history] = gradient_descent(X_training, y_training, theta, alpha, iterations);
 
-plot(1:iterations, J_history);
+theta_history(3000, :)
+theta
+plot(1:1500, J_history(1:1500));
 xlabel('Number of Iterations');
 ylabel('Cost');
+
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+
+k=linspace(-4,4,50);
+l=linspace(-4,4,50);
+
+m = size(X_training, 1);
+asdf = zeros(50, 50);
+for i = 1:50
+  for j = 1:50
+    tmp = [1;  k(i); l(j); 1];
+    asdf(i, j) = sum(((X_training * tmp) - y_training) .^ 2) / (2 * m);
+  end
+end
+
+minVal = min(min(asdf));
+[minx, miny] = find(asdf == minVal);
+
+plot3(theta_history(:, 2), theta_history(:, 1), J_history + 0.5, 'Linewidth', 3)
+hold on;
+plot3(l(miny), k(minx), minVal, '*', 'markersize', 5)
+[xx,yy]=meshgrid(k,l);
+mesh(xx,yy,asdf)
+hold off;
+
+%hold on;
+%plot3([theta_history(1, 1), theta_history(1, 2)], [theta_history(2, 1), theta_history(2, 2)], [J_history(1), J_history(1 + 1)], '-')
+%for i = 2:100
+%  plot3([theta_history(i, 1), theta_history(i, 2)], [theta_history(i + 1, 1), theta_history(i + 1, 2)], [J_history(i), J_history(i + 1)], '-')
+%end
+%hold off;
 
 fprintf('Program paused. Press enter to continue.\n');
 pause;
